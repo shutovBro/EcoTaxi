@@ -1,0 +1,10 @@
+{
+  "description": "EcoTaxi connects users with eco-friendly taxi services, promoting sustainable transportation and reducing carbon emissions for greener urban travel.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
