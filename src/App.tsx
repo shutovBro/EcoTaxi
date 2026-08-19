@@ -243,7 +243,7 @@ const StatusBar = ({ dark = false }: { dark?: boolean }) => (
 
 // ─── Bottom Nav ───────────────────────────────────────────────────────────────
 const BottomNav = ({ active, onNavigate }: { active: string; onNavigate: (s: Screen) => void }) => (
-  <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-[#E2E8E4] pb-6 pt-2">
+  <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-[#E2E8E4] pb-6 pt-2 z-20">
     <div className="flex items-center justify-around">
       {[
         { key: "home", label: "Главная", Icon: IconHome },
@@ -267,7 +267,7 @@ const SplashScreen = ({ onDone }: { onDone: () => void }) => {
   useEffect(() => { const t = setTimeout(onDone, 2200); return () => clearTimeout(t); }, [onDone]);
   return (
     <div className="flex flex-col items-center justify-center h-full bg-[#0A1A12] relative overflow-hidden">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-[-20%] left-[-20%] w-[140%] h-[140%] rounded-full bg-[#0A6644]/20" style={{ filter: "blur(80px)" }}/>
         <div className="absolute bottom-[-10%] right-[-10%] w-[80%] h-[80%] rounded-full bg-[#A8FF3E]/5" style={{ filter: "blur(60px)" }}/>
       </div>
@@ -317,7 +317,7 @@ const OnboardingScreen = ({ onDone }: { onDone: () => void }) => {
   const s = slides[step];
   return (
     <div className={`flex flex-col h-full bg-gradient-to-b ${s.bg} relative overflow-hidden`}>
-      <div className="absolute inset-0 bg-[#0A6644]/10 rounded-full scale-150" style={{ filter: "blur(100px)", top: "20%" }}/>
+      <div className="absolute inset-0 bg-[#0A6644]/10 rounded-full scale-150 pointer-events-none" style={{ filter: "blur(100px)", top: "20%" }}/>
       <StatusBar dark />
       <div className="flex-1 flex flex-col items-center justify-center px-8 gap-8">
         <div className="w-32 h-32 rounded-3xl flex items-center justify-center text-6xl shadow-2xl"
@@ -955,6 +955,13 @@ const InProgressScreen = ({ onNavigate }: { onNavigate: (s: Screen) => void }) =
           <p className="text-[10px] text-[#E53E3E]">Безопасность</p>
         </button>
       </div>
+      <button onClick={() => onNavigate("completed")}
+        className="w-full mt-4 h-12 rounded-2xl bg-[#0A6644] text-white font-semibold text-sm flex items-center justify-center gap-2">
+        <span>Завершить поездку</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" className="w-4 h-4">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
     </div>
   </div>
 );
@@ -1050,7 +1057,7 @@ const EcoScreen = ({ onNavigate }: { onNavigate: (s: Screen) => void }) => {
   return (
     <div className="flex flex-col h-full bg-[#F4F6F4]">
       <StatusBar />
-      <div className="flex-1 overflow-y-auto pb-20">
+      <div className="flex-1 overflow-y-auto pb-28">
         {/* Header */}
         <div className="bg-gradient-to-br from-[#0A1A12] to-[#0A6644] px-5 pb-8 pt-4">
           <h2 className="text-white font-bold text-xl mb-1">Эко-статистика</h2>
@@ -1167,7 +1174,7 @@ const TripsScreen = ({ onNavigate }: { onNavigate: (s: Screen) => void }) => (
       </div>
     </div>
 
-    <div className="flex-1 overflow-y-auto px-4 pb-20 space-y-3">
+    <div className="flex-1 overflow-y-auto px-4 pb-28 space-y-3">
       {TRIPS.map(trip => (
         <button key={trip.id} onClick={() => onNavigate("trip-detail")}
           className="w-full bg-white rounded-2xl p-4 text-left shadow-sm active:scale-[0.99] transition-transform">
@@ -1213,7 +1220,7 @@ const TripDetailScreen = ({ onBack }: { onBack: () => void }) => (
     <div className="flex-1 overflow-y-auto px-4 space-y-3 pb-4">
       <div className="h-36 rounded-2xl overflow-hidden bg-white shadow-sm relative">
         <MapView showRoute />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/40"/>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/40 pointer-events-none"/>
       </div>
       <div className="bg-white rounded-2xl p-4 shadow-sm space-y-3">
         <p className="text-xs font-semibold text-[#6B7572] uppercase tracking-wider">Сегодня, 14:23</p>
@@ -1270,7 +1277,7 @@ const TripDetailScreen = ({ onBack }: { onBack: () => void }) => (
 const ProfileScreen = ({ onNavigate }: { onNavigate: (s: Screen) => void }) => (
   <div className="flex flex-col h-full bg-[#F4F6F4]">
     <StatusBar />
-    <div className="flex-1 overflow-y-auto pb-20">
+    <div className="flex-1 overflow-y-auto pb-28">
       {/* Header */}
       <div className="bg-gradient-to-br from-[#0A1A12] to-[#0A6644] px-5 pt-4 pb-10">
         <div className="flex items-center gap-4">
