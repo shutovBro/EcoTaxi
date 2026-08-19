@@ -1495,7 +1495,7 @@ export default function App() {
       {/* Phone frame */}
       <div className="relative" style={{ width: 390, height: 844 }}>
         {/* Phone shell */}
-        <div className="absolute inset-0 rounded-[50px] border-[10px] border-[#222] shadow-2xl overflow-hidden bg-white z-10 pointer-events-none"/>
+        <div className="absolute inset-0 rounded-[50px] border-[10px] border-[#222] shadow-2xl overflow-hidden z-10 pointer-events-none"/>
         {/* Screen content */}
         <div className="absolute inset-[10px] rounded-[42px] overflow-hidden">
           <div className="w-full h-full relative overflow-hidden bg-white">
